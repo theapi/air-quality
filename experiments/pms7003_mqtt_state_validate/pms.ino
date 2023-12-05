@@ -5,7 +5,7 @@ const byte rxPin = D6; // from the sensor
 const byte txPin = D7;
 SoftwareSerial pmsSerial(rxPin, txPin);
 
-const long pmsInterval = 10000;
+const long pmsInterval = 30000;
 unsigned long pmsPreviousRead = 0;
 
 struct pms5003data {

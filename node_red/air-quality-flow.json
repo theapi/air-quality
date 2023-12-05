@@ -1,0 +1,304 @@
+[
+    {
+        "id": "162903de9a0a4000",
+        "type": "tab",
+        "label": "air quality",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "57a51afebfd0ce44",
+        "type": "mqtt in",
+        "z": "162903de9a0a4000",
+        "name": "sensor/d3928b/csv",
+        "topic": "sensor/d3928b/csv",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "2869d2cff789b55b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "0d2ea236a5182d22"
+            ]
+        ]
+    },
+    {
+        "id": "0d2ea236a5182d22",
+        "type": "csv",
+        "z": "162903de9a0a4000",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "aqi,pm2-5,pm10",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "483cd0dbde6af926",
+                "3c0ed6f5de4fcf1b",
+                "0fec23c897ba65dc",
+                "fd77e25f03745d1f"
+            ]
+        ]
+    },
+    {
+        "id": "483cd0dbde6af926",
+        "type": "debug",
+        "z": "162903de9a0a4000",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 100,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "3b774c5dd30baeba",
+        "type": "debug",
+        "z": "162903de9a0a4000",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3c0ed6f5de4fcf1b",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "aqi",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.aqi",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 180,
+        "wires": [
+            [
+                "3b774c5dd30baeba",
+                "c8a54d46b10f75a0"
+            ]
+        ]
+    },
+    {
+        "id": "0fec23c897ba65dc",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "pm2-5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[\"pm2-5\"]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 220,
+        "wires": [
+            [
+                "0afb73a2bdc2c33c",
+                "75cd0b6739d64317"
+            ]
+        ]
+    },
+    {
+        "id": "fd77e25f03745d1f",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "pm10",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.pm10",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 260,
+        "wires": [
+            [
+                "e432793ce7a89b62",
+                "ca2f0b3dce109c1d"
+            ]
+        ]
+    },
+    {
+        "id": "0afb73a2bdc2c33c",
+        "type": "debug",
+        "z": "162903de9a0a4000",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e432793ce7a89b62",
+        "type": "debug",
+        "z": "162903de9a0a4000",
+        "name": "debug 7",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "c8a54d46b10f75a0",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/d3928b/AQI",
+        "measurement": "sensor/d3928b/AQI",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 490,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "75cd0b6739d64317",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/d3928b/PM2-5",
+        "measurement": "sensor/d3928b/PM2-5",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 500,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ca2f0b3dce109c1d",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/d3928b/PM10",
+        "measurement": "sensor/d3928b/PM10",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 500,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "2869d2cff789b55b",
+        "type": "mqtt-broker",
+        "name": "mosquitto_local",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "47cd2837047de8dd",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "sensors",
+        "name": "local",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    }
+]

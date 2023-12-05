@@ -1,4 +1,5 @@
 
+// https://github.com/knolleary/pubsubclient/tree/master
 #include <PubSubClient.h>
 
 PubSubClient clientMqtt(clientWifi);
@@ -7,9 +8,10 @@ const long mqqtReconnectTryInterval = 5000;
 unsigned long mqttPreviousReconnectTry = 0;
 
 char g_mqtt_message_buffer[125];
-char g_pm25_env_mqtt_topic[50];
-char g_pm100_env_mqtt_topic[50];
-char g_aqi_mqtt_topic[50];
+//char g_pm25_env_mqtt_topic[50];
+//char g_pm100_env_mqtt_topic[50];
+//char g_aqi_mqtt_topic[50];
+char g_mqtt_topic_csv[50];
 
 enum MqttState {
   MQTT_STATE_SETUP,
@@ -21,6 +23,7 @@ MqttState mqttState = MQTT_STATE_SETUP;
 
 
 void mqttConnectionLoop() {
+  clientMqtt.loop();
   switch (mqttState) {
     case MQTT_STATE_SETUP:
       mqttState = MQTT_STATE_CONNECTING;
@@ -75,21 +78,27 @@ void mqttConnectionLoop() {
 }
 
 void mqttInit() {
-  sprintf(g_pm25_env_mqtt_topic, "tele/%x/PM25", ESP.getChipId());
-  sprintf(g_pm100_env_mqtt_topic, "tele/%x/PM100", ESP.getChipId());
-  sprintf(g_aqi_mqtt_topic, "tele/%x/AQI", ESP.getChipId());
+  //  sprintf(g_pm25_env_mqtt_topic, "tele/%x/PM25", ESP.getChipId());
+  //  sprintf(g_pm100_env_mqtt_topic, "tele/%x/PM100", ESP.getChipId());
+  //  sprintf(g_aqi_mqtt_topic, "tele/%x/AQI", ESP.getChipId());
+  sprintf(g_mqtt_topic_csv, "sensor/%x/csv", ESP.getChipId());
+
   clientMqtt.setServer(mqtt_broker, 1883);
 }
 
 void mqttPublishReport() {
-  sprintf(g_mqtt_message_buffer, "%d", pmsGetPm25Env());
-  clientMqtt.publish(g_pm25_env_mqtt_topic, g_mqtt_message_buffer);
-  sprintf(g_mqtt_message_buffer, "%d", pmsGetPm100Env());
-  clientMqtt.publish(g_pm100_env_mqtt_topic, g_mqtt_message_buffer);
+  //  sprintf(g_mqtt_message_buffer, "%d", pmsGetPm25Env());
+  //  clientMqtt.publish(g_pm25_env_mqtt_topic, g_mqtt_message_buffer);
+  //  sprintf(g_mqtt_message_buffer, "%d", pmsGetPm100Env());
+  //  clientMqtt.publish(g_pm100_env_mqtt_topic, g_mqtt_message_buffer);
+  //
+  //  int aqival = pmsGetAqi();
+  //  sprintf(g_mqtt_message_buffer, "%d", aqival);
+  //  clientMqtt.publish(g_aqi_mqtt_topic, g_mqtt_message_buffer);
 
   int aqival = pmsGetAqi();
-  sprintf(g_mqtt_message_buffer, "%d", aqival);
-  clientMqtt.publish(g_aqi_mqtt_topic, g_mqtt_message_buffer);
+  sprintf(g_mqtt_message_buffer, "%d,%d,%d", aqival, pmsGetPm25Env(), pmsGetPm100Env());
+  clientMqtt.publish(g_mqtt_topic_csv, g_mqtt_message_buffer);
 }
 
 
