@@ -39,7 +39,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "semi-dark-green",
                 "value": null
               },
               {
@@ -47,11 +47,11 @@
                 "value": 50
               },
               {
-                "color": "#d42237",
+                "color": "semi-dark-orange",
                 "value": 100
               },
               {
-                "color": "orange",
+                "color": "dark-red",
                 "value": 150
               },
               {
@@ -179,21 +179,21 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "always",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -318,21 +318,21 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "always",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -500,13 +500,13 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Air Quality (influxQL)",
   "uid": "da504745-c471-4f3a-9c31-7c2e4f025383",
-  "version": 23,
+  "version": 27,
   "weekStart": ""
 }
