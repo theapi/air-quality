@@ -33,6 +33,8 @@ void pmsInit() {
   pinMode(txPin, OUTPUT);
   // sensor baud rate is 9600
   pmsSerial.begin(9600);
+  pmsActiveMode(&pmsSerial);
+  pmsWakeUp(&pmsSerial);
   pmsState = PMS_STATE_WAITING_FOR_DATA;
 }
 
@@ -184,6 +186,12 @@ void pmsSleep(Stream *s) {
 // Operating mode. Stable data should be got at least 30 seconds after the sensor wakeup from the sleep mode because of the fan's performance.
 void pmsWakeUp(Stream *s) {
   uint8_t command[] = { 0x42, 0x4D, 0xE4, 0x00, 0x01, 0x01, 0x74 };
+  s->write(command, sizeof(command));
+}
+
+// Active mode. Default mode after power up. In this mode sensor would send serial data to the host automatically.
+void pmsActiveMode(Stream *s) {
+  uint8_t command[] = { 0x42, 0x4D, 0xE1, 0x00, 0x01, 0x01, 0x71 };
   s->write(command, sizeof(command));
 }
 
