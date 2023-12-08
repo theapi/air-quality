@@ -38,7 +38,7 @@
         "hdrout": "none",
         "multi": "one",
         "ret": "\\n",
-        "temp": "aqi,pm2-5,pm10",
+        "temp": "aqi,pm2-5,pm10,pm1",
         "skip": "0",
         "strings": true,
         "include_empty_strings": "",
@@ -50,7 +50,8 @@
                 "483cd0dbde6af926",
                 "3c0ed6f5de4fcf1b",
                 "0fec23c897ba65dc",
-                "fd77e25f03745d1f"
+                "fd77e25f03745d1f",
+                "8c98aebb34ff62b5"
             ]
         ]
     },
@@ -59,7 +60,7 @@
         "type": "debug",
         "z": "162903de9a0a4000",
         "name": "debug 4",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -68,22 +69,6 @@
         "statusType": "auto",
         "x": 100,
         "y": 200,
-        "wires": []
-    },
-    {
-        "id": "3b774c5dd30baeba",
-        "type": "debug",
-        "z": "162903de9a0a4000",
-        "name": "debug 5",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 280,
-        "y": 300,
         "wires": []
     },
     {
@@ -109,7 +94,6 @@
         "y": 180,
         "wires": [
             [
-                "3b774c5dd30baeba",
                 "c8a54d46b10f75a0"
             ]
         ]
@@ -137,7 +121,6 @@
         "y": 220,
         "wires": [
             [
-                "0afb73a2bdc2c33c",
                 "75cd0b6739d64317"
             ]
         ]
@@ -165,42 +148,9 @@
         "y": 260,
         "wires": [
             [
-                "e432793ce7a89b62",
                 "ca2f0b3dce109c1d"
             ]
         ]
-    },
-    {
-        "id": "0afb73a2bdc2c33c",
-        "type": "debug",
-        "z": "162903de9a0a4000",
-        "name": "debug 6",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 280,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "e432793ce7a89b62",
-        "type": "debug",
-        "z": "162903de9a0a4000",
-        "name": "debug 7",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 280,
-        "y": 380,
-        "wires": []
     },
     {
         "id": "c8a54d46b10f75a0",
@@ -255,6 +205,51 @@
         "x": 500,
         "y": 260,
         "wires": []
+    },
+    {
+        "id": "a6da174cb24cee13",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/d3928b/PM1",
+        "measurement": "sensor/d3928b/PM1",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 500,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8c98aebb34ff62b5",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "pm1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.pm1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 300,
+        "wires": [
+            [
+                "a6da174cb24cee13"
+            ]
+        ]
     },
     {
         "id": "2869d2cff789b55b",
