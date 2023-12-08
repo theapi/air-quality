@@ -119,6 +119,10 @@ void pmsLoop() {
   }
 }
 
+uint16_t pmsGetPm10Env() {
+  return pmsData.pm10_env;
+}
+
 uint16_t pmsGetPm25Env() {
   return pmsData.pm25_env;
 }

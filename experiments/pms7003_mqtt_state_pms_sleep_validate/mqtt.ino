@@ -97,7 +97,7 @@ void mqttPublishReport() {
   //  clientMqtt.publish(g_aqi_mqtt_topic, g_mqtt_message_buffer);
 
   int aqival = pmsGetAqi();
-  sprintf(g_mqtt_message_buffer, "%d,%d,%d", aqival, pmsGetPm25Env(), pmsGetPm100Env());
+  sprintf(g_mqtt_message_buffer, "%d,%d,%d,%d", aqival, pmsGetPm25Env(), pmsGetPm100Env(), pmsGetPm10Env());
   clientMqtt.publish(g_mqtt_topic_csv, g_mqtt_message_buffer);
 }
 
