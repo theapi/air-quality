@@ -12,6 +12,7 @@ char g_mqtt_message_buffer[125];
 //char g_pm100_env_mqtt_topic[50];
 //char g_aqi_mqtt_topic[50];
 char g_mqtt_topic_csv[50];
+char g_command_topic[50];
 
 enum MqttState {
   MQTT_STATE_SETUP,
@@ -43,7 +44,7 @@ void mqttConnectionLoop() {
           clientMqtt.publish(status_topic, g_mqtt_message_buffer);
 
           // Resubscribe
-          //clientMqtt.subscribe(g_command_topic);
+          clientMqtt.subscribe(g_command_topic);
         } else {
           mqttPreviousReconnectTry = millis();
           mqttState = MQTT_STATE_CONNECT_FAILED;
@@ -82,8 +83,10 @@ void mqttInit() {
   //  sprintf(g_pm100_env_mqtt_topic, "tele/%x/PM100", ESP.getChipId());
   //  sprintf(g_aqi_mqtt_topic, "tele/%x/AQI", ESP.getChipId());
   sprintf(g_mqtt_topic_csv, "sensor/%x/csv", ESP.getChipId());
-
+  sprintf(g_command_topic, "sensor/%x/cmd", ESP.getChipId());
+Serial.println(g_command_topic);
   clientMqtt.setServer(mqtt_broker, 1883);
+  clientMqtt.setCallback(mqttCallback);
 }
 
 void mqttPublishReport() {
@@ -99,6 +102,18 @@ void mqttPublishReport() {
   int aqival = pmsGetAqi();
   sprintf(g_mqtt_message_buffer, "%d,%d,%d,%d", aqival, pmsGetPm25Env(), pmsGetPm100Env(), pmsGetPm10Env());
   clientMqtt.publish(g_mqtt_topic_csv, g_mqtt_message_buffer);
+}
+
+void mqttCallback(char* topic, byte* payload, uint8_t length)
+{
+    Serial.print("Message arrived [");
+    Serial.print(topic);
+    Serial.print("] ");
+    for (int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
+    }
+    Serial.println();
+  
 }
 
 
