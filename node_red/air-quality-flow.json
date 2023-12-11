@@ -252,6 +252,336 @@
         ]
     },
     {
+        "id": "dab1c7ceba028e60",
+        "type": "inject",
+        "z": "162903de9a0a4000",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "23",
+        "payloadType": "num",
+        "x": 90,
+        "y": 680,
+        "wires": [
+            [
+                "98dd0c46d197d63e"
+            ]
+        ]
+    },
+    {
+        "id": "98dd0c46d197d63e",
+        "type": "mqtt out",
+        "z": "162903de9a0a4000",
+        "name": "sensor/d3928b/cmd",
+        "topic": "sensor/d3928b/cmd",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "2869d2cff789b55b",
+        "x": 370,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "328ab1bee1dbd858",
+        "type": "inject",
+        "z": "162903de9a0a4000",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Pe",
+        "payloadType": "str",
+        "x": 110,
+        "y": 780,
+        "wires": [
+            [
+                "1cd189f8500afd96"
+            ]
+        ]
+    },
+    {
+        "id": "1cd189f8500afd96",
+        "type": "mqtt out",
+        "z": "162903de9a0a4000",
+        "name": "sensor/cf52c4/cmd",
+        "topic": "sensor/cf52c4/cmd",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "2869d2cff789b55b",
+        "x": 350,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "c8461b2caff2db70",
+        "type": "mqtt in",
+        "z": "162903de9a0a4000",
+        "name": "sensor/cf52c4/csv",
+        "topic": "sensor/cf52c4/csv",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "2869d2cff789b55b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 380,
+        "wires": [
+            [
+                "e48487459cc00a2f"
+            ]
+        ]
+    },
+    {
+        "id": "e48487459cc00a2f",
+        "type": "csv",
+        "z": "162903de9a0a4000",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "aqi,pm2-5,pm10,pm1",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "f4ae4447682d77a6",
+                "5925dfa536fd876c",
+                "7f5ea5492e14f808",
+                "5c350444b1dee332",
+                "7c47a5d571910b77"
+            ]
+        ]
+    },
+    {
+        "id": "f4ae4447682d77a6",
+        "type": "debug",
+        "z": "162903de9a0a4000",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 100,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "5925dfa536fd876c",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "aqi",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.aqi",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 480,
+        "wires": [
+            [
+                "c0ade9933e36f251"
+            ]
+        ]
+    },
+    {
+        "id": "7f5ea5492e14f808",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "pm2-5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[\"pm2-5\"]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 520,
+        "wires": [
+            [
+                "f6fde11a98223904"
+            ]
+        ]
+    },
+    {
+        "id": "5c350444b1dee332",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "pm10",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.pm10",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 560,
+        "wires": [
+            [
+                "a86901d5daf4ee26"
+            ]
+        ]
+    },
+    {
+        "id": "c0ade9933e36f251",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/cf52c4/AQI",
+        "measurement": "sensor/cf52c4/AQI",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 490,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "f6fde11a98223904",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/cf52c4/PM2-5",
+        "measurement": "sensor/cf52c4/PM2-5",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 500,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "a86901d5daf4ee26",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/cf52c4/PM10",
+        "measurement": "sensor/cf52c4/PM10",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 500,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "2f8bbba2b9d06523",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/cf52c4/PM1",
+        "measurement": "sensor/cf52c4/PM1",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 490,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "7c47a5d571910b77",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "pm1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.pm1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 600,
+        "wires": [
+            [
+                "2f8bbba2b9d06523"
+            ]
+        ]
+    },
+    {
         "id": "2869d2cff789b55b",
         "type": "mqtt-broker",
         "name": "mosquitto_local",
