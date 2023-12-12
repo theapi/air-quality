@@ -7,6 +7,7 @@ enum OutputState {
 OutputState outputState = OUTPUT_STATE_SETUP;
 
 unsigned long outputLastProcessed = 0;
+int graph_buffer[SCREEN_WIDTH] = {0};
 
 void outputInit() {
   outputState = OUTPUT_STATE_SETUP;
@@ -29,6 +30,7 @@ void outputLoop() {
 
     case OUTPUT_STATE_SENDING:
       {
+        graphUpdateData();
         displayScreen();
         mqttPublishReport();
         outputState = OUTPUT_STATE_READY;
@@ -71,8 +73,21 @@ void screenInit() {
 }
 
 void displayScreen() {
-  if (cmdState != CMD_STATE_TOGGLE_OFF) {
-    screenAqi();
+  switch (cmdState) {
+    case CMD_STATE_SCREEN_OFF:
+      screenOff();
+      break;
+    case CMD_STATE_AQI:
+      screenAqi();
+      break;
+    case CMD_STATE_GRAPH:
+      screenGraph();
+      break;
+    case CMD_STATE_PM_VALUES:
+      screenPmValues();
+      break;
+    default:
+      screenAqi();
   }
 }
 
@@ -96,4 +111,56 @@ void screenAqi() {
   }
   showText(buf, x, 0, 4, true);
 }
+
+void screenPmValues() {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(0, 0);
+  char buf[50];
+  sprintf(buf, "PM 1.0: %d   ", pmsGetPm10Env());
+  display.println(buf);
+  sprintf(buf, "PM 2.5: %d   ", pmsGetPm25Env());
+  display.println(buf);
+  sprintf(buf, "PM 10.0: %d     ", pmsGetPm100Env());
+  display.println(buf);
+  sprintf(buf, "AQI: %d     ", pmsGetAqi());
+  display.println(buf);
+  display.display();
+}
+
+void graphUpdateData() {
+  for (int k = 0; k < SCREEN_WIDTH; k++) {
+    graph_buffer[k] = graph_buffer[k + 1];
+  }
+  graph_buffer[SCREEN_WIDTH - 1] = pmsGetAqi();
+}
+
+int maxGraphHeight() {
+  int m = 10;
+  for (int x = 0; x < SCREEN_WIDTH; x++) {
+    if (graph_buffer[x] > m) {
+      m = graph_buffer[x];
+    }
+  }
+  return m;
+}
+
+void screenGraph() {
+  display.clearDisplay();
+  char buf[20];
+  int aqival = pmsGetAqi();
+  sprintf(buf, "%d", aqival);
+
+  showText(buf, 0, 0, 3, true);
+
+  int max_height = maxGraphHeight();
+  for (int16_t i = 0; i < SCREEN_WIDTH; i++) {
+    int val = map(graph_buffer[i], 0, max_height, 0, SCREEN_HEIGHT);
+    display.drawPixel(i, SCREEN_HEIGHT - (val + 1), SSD1306_WHITE);
+  }
+
+  display.display();
+}
+
 
