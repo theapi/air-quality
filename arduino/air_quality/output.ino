@@ -118,13 +118,13 @@ void screenPmValues() {
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
   char buf[50];
-  sprintf(buf, "PM 1.0: %d   ", pmsGetPm10Env());
+  sprintf(buf, " PM 1.0: %d   ", pmsGetPm10Env());
   display.println(buf);
-  sprintf(buf, "PM 2.5: %d   ", pmsGetPm25Env());
+  sprintf(buf, " PM 2.5: %d   ", pmsGetPm25Env());
   display.println(buf);
-  sprintf(buf, "PM 10.0: %d     ", pmsGetPm100Env());
+  sprintf(buf, "PM 10.0: %d   ", pmsGetPm100Env());
   display.println(buf);
-  sprintf(buf, "AQI: %d     ", pmsGetAqi());
+  sprintf(buf, "    AQI: %d   ", pmsGetAqi());
   display.println(buf);
   display.display();
 }

@@ -2,6 +2,7 @@
 
 #include "config.h"
 #include <ESP8266WiFi.h>
+#include <ESP8266WiFiMulti.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -13,6 +14,8 @@
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
+
+ESP8266WiFiMulti wifiMulti;
 WiFiClient clientWifi;
 
 void setup() {
@@ -24,16 +27,28 @@ void setup() {
   screenInit();
 
   WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
+  wifiMulti.addAP(ssid, password);
+  wifiMulti.addAP(ssid2, password2);
 
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+  Serial.println("Connecting Wifi...");
+  if (wifiMulti.run() == WL_CONNECTED) {
+    Serial.println("");
+    Serial.println("WiFi connected");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
   }
-  Serial.println();
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+
+//  WiFi.mode(WIFI_STA);
+//  WiFi.begin(ssid, password);
+//  while (WiFi.status() != WL_CONNECTED) {
+//    delay(500);
+//    Serial.print(".");
+//  }
+//  Serial.println();
+//  Serial.println("WiFi connected");
+//  Serial.println("IP address: ");
+//  Serial.println(WiFi.localIP());
+  
   WiFi.printDiag(Serial);
 
   IPAddress ip = WiFi.localIP();
@@ -47,6 +62,7 @@ void setup() {
 }
 
 void loop() {
+  wifiMulti.run();
   pmsLoop();
   mqttConnectionLoop();
   outputLoop();
