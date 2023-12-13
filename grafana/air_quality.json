@@ -131,7 +131,7 @@
           "tags": []
         }
       ],
-      "title": "AQI",
+      "title": "AQI d3928b",
       "type": "gauge"
     },
     {
@@ -159,6 +159,118 @@
       "title": "AQI Meaning",
       "transparent": true,
       "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 350,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 100
+              },
+              {
+                "color": "dark-red",
+                "value": 150
+              },
+              {
+                "color": "dark-purple",
+                "value": 200
+              },
+              {
+                "color": "#5b040e",
+                "value": 300
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 11,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "sensor/cf52c4/AQI",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "AQI cf52c4",
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -200,20 +312,38 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "area"
             }
           },
           "mappings": [],
+          "max": 350,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "super-light-green",
                 "value": null
               },
               {
-                "color": "red",
-                "value": 80
+                "color": "super-light-yellow",
+                "value": 50
+              },
+              {
+                "color": "super-light-orange",
+                "value": 100
+              },
+              {
+                "color": "super-light-red",
+                "value": 150
+              },
+              {
+                "color": "super-light-purple",
+                "value": 200
+              },
+              {
+                "color": "#680410",
+                "value": 300
               }
             ]
           }
@@ -234,12 +364,12 @@
         ]
       },
       "gridPos": {
-        "h": 5,
+        "h": 7,
         "w": 11,
         "x": 0,
         "y": 5
       },
-      "id": 1,
+      "id": 8,
       "options": {
         "legend": {
           "calcs": [
@@ -296,7 +426,164 @@
           "tags": []
         }
       ],
-      "title": "AQI (Air Quality Index)",
+      "title": "AQI (Air Quality Index) d3928b",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "max": 350,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "super-light-green",
+                "value": null
+              },
+              {
+                "color": "super-light-yellow",
+                "value": 50
+              },
+              {
+                "color": "super-light-orange",
+                "value": 100
+              },
+              {
+                "color": "super-light-red",
+                "value": 150
+              },
+              {
+                "color": "super-light-purple",
+                "value": 200
+              },
+              {
+                "color": "#680410",
+                "value": 300
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensor/cf52c4/AQI.max"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "AQI"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 11,
+        "x": 11,
+        "y": 5
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "sensor/cf52c4/AQI",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "AQI",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "AQI (Air Quality Index) cf52c4",
       "type": "timeseries"
     },
     {
@@ -381,6 +668,18 @@
                 "value": "PM 10"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensor/d3928b/PM1.max"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM 1"
+              }
+            ]
           }
         ]
       },
@@ -388,7 +687,7 @@
         "h": 6,
         "w": 11,
         "x": 0,
-        "y": 10
+        "y": 12
       },
       "id": 3,
       "options": {
@@ -487,9 +786,298 @@
             ]
           ],
           "tags": []
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "sensor/d3928b/PM1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "PM1",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
-      "title": "Particulate Matter Values",
+      "title": "Particulate Matter Values d3928b",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensor/cf52c4/PM2-5.max"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM 2.5"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensor/cf52c4/PM10.max"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM 10"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensor/cf52c4/PM1.max"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM 1"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 11,
+        "x": 11,
+        "y": 12
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "sensor/cf52c4/PM2-5",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT max(\"value\") FROM \"autogen\".\"sensor/cf52c4/PM2-5\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "PM2.5",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "sensor/cf52c4/PM10",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "PM 10",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "sensor/cf52c4/PM1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "PM1",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Particulate Matter Values cf52c4",
       "type": "timeseries"
     }
   ],
@@ -500,13 +1088,13 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Air Quality (influxQL)",
   "uid": "da504745-c471-4f3a-9c31-7c2e4f025383",
-  "version": 29,
+  "version": 36,
   "weekStart": ""
 }
