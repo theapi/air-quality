@@ -31,24 +31,29 @@ void setup() {
   wifiMulti.addAP(ssid2, password2);
 
   Serial.println("Connecting Wifi...");
-  if (wifiMulti.run() == WL_CONNECTED) {
-    Serial.println("");
-    Serial.println("WiFi connected");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
+  while (wifiMulti.run() != WL_CONNECTED) {
+    Serial.println("WiFi not connected");
+    delay(500);
   }
+  //  if (wifiMulti.run() == WL_CONNECTED) {
+  //    Serial.println("");
+  //    Serial.println("WiFi connected");
+  //    Serial.println("IP address: ");
+  //    Serial.println(WiFi.localIP());
+  //  }
 
-//  WiFi.mode(WIFI_STA);
-//  WiFi.begin(ssid, password);
-//  while (WiFi.status() != WL_CONNECTED) {
-//    delay(500);
-//    Serial.print(".");
-//  }
-//  Serial.println();
-//  Serial.println("WiFi connected");
-//  Serial.println("IP address: ");
-//  Serial.println(WiFi.localIP());
-  
+
+  //  WiFi.mode(WIFI_STA);
+  //  WiFi.begin(ssid, password);
+  //  while (WiFi.status() != WL_CONNECTED) {
+  //    delay(500);
+  //    Serial.print(".");
+  //  }
+  Serial.println();
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+
   WiFi.printDiag(Serial);
 
   IPAddress ip = WiFi.localIP();

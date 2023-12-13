@@ -1,4 +1,7 @@
 
+
+#define GRAPH_WIDTH SCREEN_WIDTH - 1
+
 enum OutputState {
   OUTPUT_STATE_SETUP,
   OUTPUT_STATE_READY,
@@ -7,7 +10,8 @@ enum OutputState {
 OutputState outputState = OUTPUT_STATE_SETUP;
 
 unsigned long outputLastProcessed = 0;
-int graph_buffer[SCREEN_WIDTH] = {0};
+
+int graph_buffer[GRAPH_WIDTH] = {0};
 
 void outputInit() {
   outputState = OUTPUT_STATE_SETUP;
@@ -130,19 +134,28 @@ void screenPmValues() {
 }
 
 void graphUpdateData() {
-  for (int k = 0; k < SCREEN_WIDTH; k++) {
+  for (int k = 0; k < GRAPH_WIDTH; k++) {
     graph_buffer[k] = graph_buffer[k + 1];
   }
-  graph_buffer[SCREEN_WIDTH - 1] = pmsGetAqi();
+  graph_buffer[GRAPH_WIDTH - 1] = pmsGetAqi();
 }
 
 int maxGraphHeight() {
-  int m = 10;
-  for (int x = 0; x < SCREEN_WIDTH; x++) {
-    if (graph_buffer[x] > m) {
-      m = graph_buffer[x];
+  int highest = 0;
+  for (int x = 0; x < GRAPH_WIDTH; x++) {
+    if (graph_buffer[x] > highest) {
+      highest = graph_buffer[x];
     }
   }
+
+  int m = 100;
+  if (highest > m) {
+    m = 200;
+  }
+  if (highest > m) {
+    m = 300;
+  }
+
   return m;
 }
 
@@ -155,7 +168,7 @@ void screenGraph() {
   showText(buf, 0, 0, 3, true);
 
   int max_height = maxGraphHeight();
-  for (int16_t i = 0; i < SCREEN_WIDTH; i++) {
+  for (int16_t i = 0; i < GRAPH_WIDTH; i++) {
     int val = map(graph_buffer[i], 0, max_height, 0, SCREEN_HEIGHT);
     display.drawPixel(i, SCREEN_HEIGHT - (val + 1), SSD1306_WHITE);
   }
