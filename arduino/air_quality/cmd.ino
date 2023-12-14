@@ -1,11 +1,17 @@
 
-enum CMDState {
-  CMD_STATE_SCREEN_OFF,
-  CMD_STATE_AQI,
-  CMD_STATE_GRAPH,
-  CMD_STATE_PM_VALUES
+enum DisplayState {
+  DISPLAY_STATE_OFF,
+  DISPLAY_STATE_AQI,
+  DISPLAY_STATE_GRAPH,
+  DISPLAY_STATE_PM_VALUES
 };
-CMDState cmdState = CMD_STATE_GRAPH;
+DisplayState displayState = DISPLAY_STATE_GRAPH;
+
+enum LedState {
+  LED_STATE_OFF,
+  LED_STATE_ON,
+};
+LedState ledState = LED_STATE_ON;
 
 void handleCommand(char cmd, char param) {
   switch (cmd) {
@@ -13,32 +19,47 @@ void handleCommand(char cmd, char param) {
       switch (param) {
         case 'o':
           Serial.println("display: off");
-          if (cmdState != CMD_STATE_SCREEN_OFF) {
-            cmdState = CMD_STATE_SCREEN_OFF;
+          if (displayState != DISPLAY_STATE_OFF) {
+            displayState = DISPLAY_STATE_OFF;
           }
           break;
         case 'a':
           Serial.println("display: AQI");
-          if (cmdState != CMD_STATE_AQI) {
-            cmdState = CMD_STATE_AQI;
+          if (displayState != DISPLAY_STATE_AQI) {
+            displayState = DISPLAY_STATE_AQI;
           }
           break;
         case 'g':
           Serial.println("display: graph");
-          if (cmdState != CMD_STATE_GRAPH) {
-            cmdState = CMD_STATE_GRAPH;
+          if (displayState != DISPLAY_STATE_GRAPH) {
+            displayState = DISPLAY_STATE_GRAPH;
           }
           break;
         case 'v':
           Serial.println("display: pm values");
-          if (cmdState != CMD_STATE_PM_VALUES) {
-            cmdState = CMD_STATE_PM_VALUES;
+          if (displayState != DISPLAY_STATE_PM_VALUES) {
+            displayState = DISPLAY_STATE_PM_VALUES;
           }
           break;
         default:
           break;
       }
       displayScreen();
+      break;
+    case 'L':
+      switch (param) {
+        case 't':
+          Serial.println("led: toggle");
+          if (ledState != LED_STATE_OFF) {
+            ledState = LED_STATE_OFF;
+          } else {
+            ledState = LED_STATE_ON;
+          }
+          break;
+        default:
+          break;
+      }
+      displayLed();
       break;
     default:
       break;

@@ -1,6 +1,23 @@
 
+#include <FastLED.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 
+#define NUM_LEDS 1
+#define DATA_PIN 8 // == D8 on NodeMcu
+#define BRIGHTNESS 5
+
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 32 // OLED display height, in pixels
 #define GRAPH_WIDTH SCREEN_WIDTH - 1
+
+// Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
+#define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
+
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+CRGB leds[NUM_LEDS];
 
 enum OutputState {
   OUTPUT_STATE_SETUP,
@@ -35,8 +52,9 @@ void outputLoop() {
     case OUTPUT_STATE_SENDING:
       {
         graphUpdateData();
-        displayScreen();
         mqttPublishReport();
+        displayScreen();
+        displayLed();
         outputState = OUTPUT_STATE_READY;
         break;
       }
@@ -53,6 +71,48 @@ void showText(char* text, int x, int y, int size, boolean d) {
   if (d) {
     display.display();
   }
+}
+
+void ledInit() {
+  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+  FastLED.setBrightness(BRIGHTNESS);
+  leds[0] = 0x999999;
+  FastLED.show();
+}
+
+void displayLed() {
+  switch (ledState) {
+    case LED_STATE_OFF:
+      leds[0] = CRGB::Black;
+      FastLED.show();
+      break;
+    case LED_STATE_ON:
+      leds[0] = ledAqiValue(pmsGetAqi());
+      FastLED.show();
+      break;
+  }
+}
+
+unsigned long ledAqiValue(int aqival) {
+  if (aqival <= 50) {
+    return CRGB::Green;
+  }
+  if (aqival <= 100) {
+    return CRGB::Yellow;
+  }
+  if (aqival <= 150) {
+    return CRGB::Orange;
+  }
+  if (aqival <= 200) {
+    return CRGB::Red;
+  }
+  if (aqival <= 300) {
+    return CRGB::Purple;
+  }
+  if (aqival > 300) {
+    return CRGB::DarkViolet;
+  }
+  return CRGB::Blue;
 }
 
 void screenInit() {
@@ -77,17 +137,17 @@ void screenInit() {
 }
 
 void displayScreen() {
-  switch (cmdState) {
-    case CMD_STATE_SCREEN_OFF:
+  switch (displayState) {
+    case DISPLAY_STATE_OFF:
       screenOff();
       break;
-    case CMD_STATE_AQI:
+    case DISPLAY_STATE_AQI:
       screenAqi();
       break;
-    case CMD_STATE_GRAPH:
+    case DISPLAY_STATE_GRAPH:
       screenGraph();
       break;
-    case CMD_STATE_PM_VALUES:
+    case DISPLAY_STATE_PM_VALUES:
       screenPmValues();
       break;
     default:
@@ -148,10 +208,7 @@ int maxGraphHeight() {
     }
   }
 
-  int m = 100;
-  if (highest > m) {
-    m = 200;
-  }
+  int m = 150;
   if (highest > m) {
     m = 300;
   }
