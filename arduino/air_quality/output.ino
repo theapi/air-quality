@@ -6,7 +6,7 @@
 
 #define NUM_LEDS 1
 #define DATA_PIN 8 // == D8 on NodeMcu
-#define BRIGHTNESS 5
+#define BRIGHTNESS 126
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 32 // OLED display height, in pixels
