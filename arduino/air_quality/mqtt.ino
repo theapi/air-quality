@@ -10,6 +10,7 @@ unsigned long mqttPreviousReconnectTry = 0;
 char g_mqtt_message_buffer[125];
 char g_mqtt_topic_csv[50];
 char g_command_topic[50];
+char g_led_topic[50];
 
 enum MqttState {
   MQTT_STATE_SETUP,
@@ -42,6 +43,7 @@ void mqttConnectionLoop() {
 
           // Resubscribe
           clientMqtt.subscribe(g_command_topic);
+          clientMqtt.subscribe(g_led_topic);
         } else {
           mqttPreviousReconnectTry = millis();
           mqttState = MQTT_STATE_CONNECT_FAILED;
@@ -78,6 +80,7 @@ void mqttConnectionLoop() {
 void mqttInit() {
   sprintf(g_mqtt_topic_csv, "sensor/%x/csv", ESP.getChipId());
   sprintf(g_command_topic, "sensor/%x/cmd", ESP.getChipId());
+  sprintf(g_led_topic, "sensor/%x/led", ESP.getChipId());
   Serial.println(g_command_topic);
   clientMqtt.setServer(mqtt_broker, 1883);
   clientMqtt.setCallback(mqttCallback);
@@ -91,15 +94,23 @@ void mqttPublishReport() {
 
 void mqttCallback(char* topic, byte* payload, uint8_t length)
 {
+  char characters[length];
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
   for (int i = 0; i < length; i++) {
     Serial.print((char)payload[i]);
+    characters[i] = (char)payload[i];
   }
   Serial.println();
 
-  handleCommand(payload[0], payload[1]);
+
+  if (strstr(topic, "led") != NULL) {
+    int val = atoi(characters);
+    ledSetBrightness(val);
+  } else {
+    handleCommand(payload[0], payload[1]);
+  }
 }
 
 

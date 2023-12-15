@@ -80,6 +80,13 @@ void ledInit() {
   FastLED.show();
 }
 
+void ledSetBrightness(int val) {
+  Serial.print("brightness: ");
+  Serial.println(val);
+  FastLED.setBrightness(val);
+  FastLED.show();
+}
+
 void displayLed() {
   switch (ledState) {
     case LED_STATE_OFF:

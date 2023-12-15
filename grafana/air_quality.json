@@ -139,32 +139,6 @@
         "type": "influxdb",
         "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
       },
-      "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 5,
-        "y": 0
-      },
-      "id": 4,
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "\n<div>\n<span style=\"background-color: #009966; margin:5px;\">&nbsp;&nbsp;</span>\n Good\n</div>\n\n<div >\n<span style=\"background-color: #ffde33;  margin:5px;\">&nbsp;&nbsp;</span>\n Moderate\n</div>\n\n<div >\n<span style=\"background-color: #ff9933; margin:5px;\">&nbsp;&nbsp;</span>\n Unhealthy for Sensitive Groups\n</div>\n\n<div >\n<span style=\"background-color: #cc0033; margin:5px;\">&nbsp;&nbsp;</span>\n Unhealthy\n</div>\n\n<div >\n<span style=\"background-color: #660099; margin:5px;\">&nbsp;&nbsp;</span>\n Very Unhealthy\n</div>\n\n<div >\n<span style=\"background-color: #7e0023;  margin:5px;\">&nbsp;&nbsp;</span>\n Hazardous\n</div>",
-        "mode": "html"
-      },
-      "pluginVersion": "10.2.2",
-      "title": "AQI Meaning",
-      "transparent": true,
-      "type": "text"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -271,6 +245,32 @@
       ],
       "title": "AQI cf52c4",
       "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "ecca5d3f-dc0d-4f6b-9188-3dd2f4f70772"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 16,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "\n<div>\n<span style=\"background-color: #009966; margin:5px;\">&nbsp;&nbsp;</span>\n Good\n</div>\n\n<div >\n<span style=\"background-color: #ffde33;  margin:5px;\">&nbsp;&nbsp;</span>\n Moderate\n</div>\n\n<div >\n<span style=\"background-color: #ff9933; margin:5px;\">&nbsp;&nbsp;</span>\n Unhealthy for Sensitive Groups\n</div>\n\n<div >\n<span style=\"background-color: #cc0033; margin:5px;\">&nbsp;&nbsp;</span>\n Unhealthy\n</div>\n\n<div >\n<span style=\"background-color: #660099; margin:5px;\">&nbsp;&nbsp;</span>\n Very Unhealthy\n</div>\n\n<div >\n<span style=\"background-color: #7e0023;  margin:5px;\">&nbsp;&nbsp;</span>\n Hazardous\n</div>",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.2",
+      "title": "AQI Meaning",
+      "transparent": true,
+      "type": "text"
     },
     {
       "datasource": {
@@ -1088,13 +1088,13 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Air Quality (influxQL)",
   "uid": "da504745-c471-4f3a-9c31-7c2e4f025383",
-  "version": 36,
+  "version": 37,
   "weekStart": ""
 }
