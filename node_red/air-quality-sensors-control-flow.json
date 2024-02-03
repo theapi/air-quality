@@ -27,8 +27,8 @@
         "payloadType": "str",
         "topic": "payload",
         "topicType": "msg",
-        "x": 160,
-        "y": 260,
+        "x": 140,
+        "y": 480,
         "wires": [
             [
                 "2d0e2f912b2f0291"
@@ -49,8 +49,8 @@
         "correl": "",
         "expiry": "",
         "broker": "2869d2cff789b55b",
-        "x": 410,
-        "y": 260,
+        "x": 390,
+        "y": 480,
         "wires": []
     },
     {
@@ -73,8 +73,8 @@
         "payloadType": "str",
         "topic": "payload",
         "topicType": "msg",
-        "x": 150,
-        "y": 80,
+        "x": 130,
+        "y": 300,
         "wires": [
             [
                 "f113a3dd6dde3e26"
@@ -95,8 +95,8 @@
         "correl": "",
         "expiry": "",
         "broker": "2869d2cff789b55b",
-        "x": 410,
-        "y": 80,
+        "x": 390,
+        "y": 300,
         "wires": []
     },
     {
@@ -119,8 +119,8 @@
         "payloadType": "str",
         "topic": "payload",
         "topicType": "msg",
-        "x": 150,
-        "y": 200,
+        "x": 130,
+        "y": 420,
         "wires": [
             [
                 "e5d0ecc2947d648a"
@@ -141,8 +141,8 @@
         "correl": "",
         "expiry": "",
         "broker": "2869d2cff789b55b",
-        "x": 410,
-        "y": 200,
+        "x": 390,
+        "y": 420,
         "wires": []
     },
     {
@@ -165,8 +165,8 @@
         "payloadType": "str",
         "topic": "payload",
         "topicType": "msg",
-        "x": 160,
-        "y": 140,
+        "x": 140,
+        "y": 360,
         "wires": [
             [
                 "72d1e5c43afe35d6"
@@ -187,8 +187,8 @@
         "correl": "",
         "expiry": "",
         "broker": "2869d2cff789b55b",
-        "x": 410,
-        "y": 140,
+        "x": 390,
+        "y": 360,
         "wires": []
     },
     {
@@ -211,8 +211,8 @@
         "payloadType": "str",
         "topic": "payload",
         "topicType": "msg",
-        "x": 150,
-        "y": 380,
+        "x": 130,
+        "y": 560,
         "wires": [
             [
                 "c22cf9976d198476"
@@ -233,8 +233,8 @@
         "correl": "",
         "expiry": "",
         "broker": "2869d2cff789b55b",
-        "x": 410,
-        "y": 380,
+        "x": 390,
+        "y": 560,
         "wires": []
     },
     {
@@ -257,8 +257,8 @@
         "max": "255",
         "step": 1,
         "className": "",
-        "x": 190,
-        "y": 460,
+        "x": 170,
+        "y": 640,
         "wires": [
             [
                 "1737a4056d17f9af"
@@ -279,8 +279,8 @@
         "correl": "",
         "expiry": "",
         "broker": "2869d2cff789b55b",
-        "x": 410,
-        "y": 460,
+        "x": 390,
+        "y": 640,
         "wires": []
     },
     {
@@ -304,7 +304,7 @@
         "topic": "payload",
         "topicType": "msg",
         "x": 140,
-        "y": 720,
+        "y": 900,
         "wires": [
             [
                 "719e868a734cfe5f"
@@ -326,7 +326,7 @@
         "expiry": "",
         "broker": "2869d2cff789b55b",
         "x": 390,
-        "y": 720,
+        "y": 900,
         "wires": []
     },
     {
@@ -350,7 +350,7 @@
         "topic": "payload",
         "topicType": "msg",
         "x": 130,
-        "y": 540,
+        "y": 720,
         "wires": [
             [
                 "8d1e8d4927bdf34e"
@@ -372,7 +372,7 @@
         "expiry": "",
         "broker": "2869d2cff789b55b",
         "x": 390,
-        "y": 540,
+        "y": 720,
         "wires": []
     },
     {
@@ -396,7 +396,7 @@
         "topic": "payload",
         "topicType": "msg",
         "x": 130,
-        "y": 660,
+        "y": 840,
         "wires": [
             [
                 "0c94ca163c5b6183"
@@ -418,7 +418,7 @@
         "expiry": "",
         "broker": "2869d2cff789b55b",
         "x": 390,
-        "y": 660,
+        "y": 840,
         "wires": []
     },
     {
@@ -442,7 +442,7 @@
         "topic": "payload",
         "topicType": "msg",
         "x": 140,
-        "y": 600,
+        "y": 780,
         "wires": [
             [
                 "51ae4d3e7d8a3855"
@@ -464,7 +464,7 @@
         "expiry": "",
         "broker": "2869d2cff789b55b",
         "x": 390,
-        "y": 600,
+        "y": 780,
         "wires": []
     },
     {
@@ -488,7 +488,7 @@
         "topic": "payload",
         "topicType": "msg",
         "x": 130,
-        "y": 840,
+        "y": 960,
         "wires": [
             [
                 "303402430cdcaf65"
@@ -510,7 +510,7 @@
         "expiry": "",
         "broker": "2869d2cff789b55b",
         "x": 390,
-        "y": 840,
+        "y": 960,
         "wires": []
     },
     {
@@ -534,7 +534,7 @@
         "step": 1,
         "className": "",
         "x": 170,
-        "y": 920,
+        "y": 1040,
         "wires": [
             [
                 "11846033619c3eeb"
@@ -556,8 +556,146 @@
         "expiry": "",
         "broker": "2869d2cff789b55b",
         "x": 390,
-        "y": 920,
+        "y": 1040,
         "wires": []
+    },
+    {
+        "id": "b9ec231d398115a8",
+        "type": "inject",
+        "z": "f19ace80cfd4e33d",
+        "name": "Night Display",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "v": "payload",
+                "vt": "msg"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 21 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Do",
+        "payloadType": "str",
+        "x": 160,
+        "y": 40,
+        "wires": [
+            [
+                "dacfae25acc25ee9"
+            ]
+        ]
+    },
+    {
+        "id": "dacfae25acc25ee9",
+        "type": "mqtt out",
+        "z": "f19ace80cfd4e33d",
+        "name": "sensor/cf52c4/cmd",
+        "topic": "sensor/cf52c4/cmd",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "2869d2cff789b55b",
+        "x": 510,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a81530cacd5d1465",
+        "type": "inject",
+        "z": "f19ace80cfd4e33d",
+        "name": "Night Led",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "v": "payload",
+                "vt": "msg"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 21 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Lt",
+        "payloadType": "str",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "dacfae25acc25ee9"
+            ]
+        ]
+    },
+    {
+        "id": "af08e2da87130a22",
+        "type": "inject",
+        "z": "f19ace80cfd4e33d",
+        "name": "Morning Display",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "v": "payload",
+                "vt": "msg"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 08 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Dg",
+        "payloadType": "str",
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "dacfae25acc25ee9"
+            ]
+        ]
+    },
+    {
+        "id": "b04e841f68010228",
+        "type": "inject",
+        "z": "f19ace80cfd4e33d",
+        "name": "Night Led",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "v": "payload",
+                "vt": "msg"
+            }
+        ],
+        "repeat": "",
+        "crontab": "30 08 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Lt",
+        "payloadType": "str",
+        "x": 155,
+        "y": 223,
+        "wires": [
+            [
+                "dacfae25acc25ee9"
+            ]
+        ]
     },
     {
         "id": "9661c8e04a132b47",
