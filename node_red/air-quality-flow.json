@@ -60,7 +60,7 @@
         "type": "debug",
         "z": "162903de9a0a4000",
         "name": "debug 4",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -304,7 +304,7 @@
         "type": "debug",
         "z": "162903de9a0a4000",
         "name": "debug 6",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -492,6 +492,250 @@
         "wires": [
             [
                 "2f8bbba2b9d06523"
+            ]
+        ]
+    },
+    {
+        "id": "25cd2c797facabe5",
+        "type": "mqtt in",
+        "z": "162903de9a0a4000",
+        "name": "sensor/d38f88/csv",
+        "topic": "sensor/d38f88/csv",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "2869d2cff789b55b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 700,
+        "wires": [
+            [
+                "0179d38c91ed53a6"
+            ]
+        ]
+    },
+    {
+        "id": "0179d38c91ed53a6",
+        "type": "csv",
+        "z": "162903de9a0a4000",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "aqi,pm2-5,pm10,pm1",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 110,
+        "y": 780,
+        "wires": [
+            [
+                "82ea26d706d206dd",
+                "5ce47c257a46fa43",
+                "9b983107eafed402",
+                "56c106394d3d9639",
+                "111ae87fbc1a3c2c"
+            ]
+        ]
+    },
+    {
+        "id": "82ea26d706d206dd",
+        "type": "debug",
+        "z": "162903de9a0a4000",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 100,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "5ce47c257a46fa43",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "aqi",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.aqi",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 800,
+        "wires": [
+            [
+                "07b989cbd55ec546"
+            ]
+        ]
+    },
+    {
+        "id": "9b983107eafed402",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "pm2-5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[\"pm2-5\"]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 840,
+        "wires": [
+            [
+                "d4c30642068b3222"
+            ]
+        ]
+    },
+    {
+        "id": "56c106394d3d9639",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "pm10",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.pm10",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 880,
+        "wires": [
+            [
+                "115fe6dd2b967426"
+            ]
+        ]
+    },
+    {
+        "id": "07b989cbd55ec546",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/d38f88/AQI",
+        "measurement": "sensor/d38f88/AQI",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 490,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "d4c30642068b3222",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/d38f88/PM2-5",
+        "measurement": "sensor/d38f88/PM2-5",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 500,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "115fe6dd2b967426",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/d38f88/PM10",
+        "measurement": "sensor/d38f88/PM10",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 500,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "952c25e5f381a87d",
+        "type": "influxdb out",
+        "z": "162903de9a0a4000",
+        "influxdb": "47cd2837047de8dd",
+        "name": "sensor/d38f88/PM1",
+        "measurement": "sensor/d38f88/PM1",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "sensors",
+        "x": 490,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "111ae87fbc1a3c2c",
+        "type": "change",
+        "z": "162903de9a0a4000",
+        "name": "pm1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.pm1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 920,
+        "wires": [
+            [
+                "952c25e5f381a87d"
             ]
         ]
     },

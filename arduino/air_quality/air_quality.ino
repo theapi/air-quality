@@ -47,6 +47,7 @@ void setup() {
 void loop() {
   wifiMulti.run();
   pmsLoop();
+  //dummy_pmsLoop();
   mqttConnectionLoop();
   outputLoop();
 }
