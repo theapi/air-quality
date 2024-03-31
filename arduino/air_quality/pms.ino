@@ -8,6 +8,7 @@ SoftwareSerial pmsSerial(rxPin, txPin);
 const long pmsInterval = 60000;
 const long pmsWakeInterval = 30000;
 unsigned long pmsPreviousRead = 0;
+unsigned long pmsWakeStart = 0;
 
 struct pms5003data {
   uint16_t framelen;
@@ -85,6 +86,7 @@ void pmsLoop() {
     case PMS_STATE_DATA_RECEIVED:
       {
         pmsSleep(&pmsSerial);
+        Serial.println("Sleep");
         pmsState = PMS_STATE_SLEEPING;
         break;
       }
@@ -100,6 +102,8 @@ void pmsLoop() {
         unsigned long currentMillis = millis();
         if (currentMillis - pmsPreviousRead >= pmsInterval) {
           pmsWakeUp(&pmsSerial);
+          Serial.println("Waking");
+          pmsWakeStart = millis();
           pmsState = PMS_STATE_WAKING;
         }
         break;
@@ -108,7 +112,8 @@ void pmsLoop() {
     case PMS_STATE_WAKING:
       {
         unsigned long currentMillis = millis();
-        if (currentMillis - pmsPreviousRead >= pmsWakeInterval) {
+        if (currentMillis - pmsWakeStart >= pmsWakeInterval) {
+          Serial.println("Awake");
           pmsState = PMS_STATE_WAITING_FOR_DATA;
         }
       }
