@@ -3,6 +3,8 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <WiFiUdp.h>
+#include "UdpAQIPayload.h"
 
 #define NUM_LEDS 1
 #define DATA_PIN 8 // == D8 on NodeMcu
@@ -18,6 +20,11 @@
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 CRGB leds[NUM_LEDS];
+
+// A UDP instance to let us send and receive packets over UDP
+WiFiUDP Udp;
+theapi::UdpAQIPayload aqi_payload = theapi::UdpAQIPayload();
+uint8_t messageId = 0;
 
 enum OutputState {
   OUTPUT_STATE_SETUP,
@@ -55,6 +62,7 @@ void outputLoop() {
         mqttPublishReport();
         displayScreen();
         displayLed();
+        udpBroadcast();
         outputState = OUTPUT_STATE_READY;
         break;
       }
@@ -238,6 +246,29 @@ void screenGraph() {
   }
 
   display.display();
+}
+
+void udpBroadcast() {
+  Udp.beginPacketMulticast(ipMulti, portMulti, WiFi.localIP());
+  Udp.write('\t'); // Payload start byte
+
+  // Send the contents of the buffer.
+  size_t len = aqi_payload.size();
+  uint8_t sbuf[len];
+
+
+  aqi_payload.setMsgId(messageId++);
+  
+  int aqival = pmsGetAqi();
+  aqi_payload.setAqi(aqival);
+  aqi_payload.setDeviceId(ESP.getChipId());
+  
+  aqi_payload.serialize(sbuf);
+  Udp.write(sbuf, len);
+
+  Udp.write('\n');
+  Udp.endPacket();
+  Udp.stop();
 }
 
 

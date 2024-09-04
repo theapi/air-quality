@@ -5,6 +5,9 @@
 #include <ESP8266WiFiMulti.h>
 
 
+IPAddress ipMulti(239, 0, 0, 47);
+unsigned int portMulti = 12345;  
+
 ESP8266WiFiMulti wifiMulti;
 WiFiClient clientWifi;
 
@@ -33,6 +36,8 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   WiFi.printDiag(Serial);
+
+  Serial.println(ESP.getChipId());
 
   IPAddress ip = WiFi.localIP();
   char buf[20];
