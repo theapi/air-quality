@@ -177,6 +177,7 @@ void diplaySensorA(uint16_t aqi, bool current) {
     display.fillScreen(bg);
     u8g2Fonts.setCursor(x, y); // start writing at this position
     if (current) {
+      sensorAtime = currentMillis;
       u8g2Fonts.print(aqi);
     } else {
       u8g2Fonts.print("-");
@@ -196,6 +197,7 @@ void diplaySensorB(uint16_t aqi, bool current) {
     display.fillScreen(bg);
     u8g2Fonts.setCursor(x, y); // start writing at this position
     if (current) {
+      sensorBtime = currentMillis;
       u8g2Fonts.print(aqi);
     } else {
       u8g2Fonts.print("-");
@@ -215,6 +217,7 @@ void diplaySensorC(uint16_t aqi, bool current) {
     display.fillScreen(bg);
     u8g2Fonts.setCursor(x, y); // start writing at this position
     if (current) {
+      sensorCtime = currentMillis;
       u8g2Fonts.print(aqi);
     } else {
       u8g2Fonts.print("-");
